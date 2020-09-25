@@ -1,4 +1,5 @@
 import "../styles/navbarGlobal.css";
+import "../styles/basicGrid.css";
 
 
 function MyApp({ Component, pageProps }) {

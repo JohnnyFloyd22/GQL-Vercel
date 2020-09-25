@@ -23,8 +23,8 @@ var firebaseConfig = {
   const db = firebase.firestore();
 
 
-  const totalStartups= () => db.collection('startups').get().length
-const allStartups = () => db.collection('startups').get();
+  const totalStartups= () => startups.length()
+const allStartups = () => startups
 
 
 const newStartup = (parent, args) =>{
@@ -35,7 +35,8 @@ const newStartup = (parent, args) =>{
         id:startups.length,
         name:args.input.name,
         cnpj:args.input.cnpj,
-        socioId:args.input.socioId
+        socioId:args.input.socioId,
+        logo:args.input.logo
     }
     //push new post object to posts
     startups.push(startup)

@@ -3,6 +3,7 @@ import react,{useState} from 'react'
 import {gql} from 'apollo-boost'
 
 
+
 const client = new ApolloClient({
     uri: 'http://localhost:8000/graphql'
  })
@@ -26,17 +27,16 @@ function Grid() {
 
 
   return (
-
-    
-    <div className='basicGrid'>
+   
+    <section className='basicGrid'>
      {startups.map((item, key)=>(
         <div className='card'
             key={key}
         >
-            <img src={(startups[key].logo)}/>
+            <img className='logo'src={startups[key].logo } alt={startups[key].name}/>
         </div>
      ))}
-    </div>
+    </section>
  
   );
 }

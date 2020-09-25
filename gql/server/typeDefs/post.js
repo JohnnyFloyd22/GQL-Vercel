@@ -6,6 +6,7 @@ module.exports = gql`
           name:String!
           cnpj: Int!
           socioId: ID!
+          logo:String!
     }    
 
     type Query{
