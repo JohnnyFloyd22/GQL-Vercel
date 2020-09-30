@@ -11,9 +11,10 @@
     height: 100%;
     width: 100%;
     border-radius: 4px;
-    transition: all 500 ms;
+    transition: all 500ms;
     overflow: hidden;
     padding: center;
+    align-items: center;
 
     background-size: cover;
     background-position: center;

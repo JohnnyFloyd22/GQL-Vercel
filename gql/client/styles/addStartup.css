@@ -1,0 +1,21 @@
+.formCont{
+    margin-left: 20rem;
+    margin-right: 20rem;
+    padding-bottom:45em;
+    background: #bbb7b7;
+    display: flex;
+    border-radius: 25px;
+   justify-content: center;
+}
+
+.formCont h2{
+    background-color: #c8ff00;
+    text-align: center;
+    
+    padding: center;
+}
+.formStartData{
+    background-color:crimson;
+    
+
+}

@@ -8,6 +8,10 @@ const client = new ApolloClient({
     uri: 'http://localhost:8000/graphql'
  })
 
+
+
+
+
 function Grid() {
 
     const [startups, setStartups] = useState([])
@@ -25,7 +29,6 @@ function Grid() {
     `
   }).then(result => setStartups(result.data.allStartups))
 
-
   return (
    
     <section className='basicGrid'>
@@ -33,7 +36,7 @@ function Grid() {
         <div className='card'
             key={key}
         >
-            <img className='logo'src={startups[key].logo } alt={startups[key].name}/>
+            <img className='logo' src={startups[key].logo } alt={startups[key].name}/>
         </div>
      ))}
     </section>

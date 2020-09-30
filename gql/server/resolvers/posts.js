@@ -23,7 +23,7 @@ var firebaseConfig = {
   const db = firebase.firestore();
 
 
-  const totalStartups= () => startups.length()
+const totalStartups= () => startups.length
 const allStartups = () => startups
 
 

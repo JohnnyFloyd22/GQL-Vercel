@@ -12,16 +12,18 @@ module.exports = gql`
     type Query{
         totalStartups:Int!
         allStartups:[startups]
+       
     }
 
     input startupInput{
         name:String!
         cnpj:Int!
         socioId:ID!
+        logo:String!
     }
 
    type Mutation{
-        newStartup(input : startupInput!): startups !
+        newStartup(input :startupInput!): startups !
    }
 
 

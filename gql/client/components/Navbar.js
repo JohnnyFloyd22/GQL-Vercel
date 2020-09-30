@@ -55,7 +55,7 @@ function Navbar() {
           </li>
 
           <li className="nav-item">
-            <a href="addStartup" className="nav-link">
+            <a href="onePage" className="nav-link">
               <svg
                 aria-hidden="true"
                 focusable="false"
