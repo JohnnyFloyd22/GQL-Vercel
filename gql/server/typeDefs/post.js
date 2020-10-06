@@ -2,23 +2,25 @@ const { gql } = require("apollo-server-express");
 
 module.exports = gql`
     type startups{
-          id:ID!
+          id:String!
           name:String!
           cnpj: Int!
-          socioId: ID!
+          socioId: String!
           logo:String!
     }    
 
     type Query{
         totalStartups:Int!
-        allStartups:[startups]
+        allStartups:[startups!]
        
     }
+
+    
 
     input startupInput{
         name:String!
         cnpj:Int!
-        socioId:ID!
+        socioId:String!
         logo:String!
     }
 

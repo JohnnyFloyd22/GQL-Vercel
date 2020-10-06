@@ -3,9 +3,8 @@ const express = require('express')
 const {fileLoader, mergeTypes, mergeResolvers} = require ('merge-graphql-schemas')
 
 
-
 //getting ApolloServer
-const {ApolloServer} = require('apollo-server-express')
+const {ApolloServer,graphqlExpress} = require('apollo-server-express')
 
 //modules
 const http = require('http')
@@ -47,10 +46,15 @@ const httpserver = http.createServer
 //app.get uses a async fct !! rest endpoint
 
 app.get('/rest',function(req,res){
+    console.log("chegay")
     res.json({
+        
         data:'you hit rest endpoint horray'
     })
 })
+
+
+
 
 
 //port 

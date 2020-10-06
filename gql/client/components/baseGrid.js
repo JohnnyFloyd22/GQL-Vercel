@@ -1,5 +1,5 @@
 import ApolloClient from 'apollo-boost'
-import react,{useState} from 'react'
+import React,{useState} from 'react'
 import {gql} from 'apollo-boost'
 
 
@@ -12,36 +12,52 @@ const client = new ApolloClient({
 
 
 
-function Grid() {
+class Grid extends React.Component {
 
-    const [startups, setStartups] = useState([])
+    constructor(params){
+     super(params)
+      this.state={
+        startups:[]
+      }
+    }
+
+  componentDidMount=()=>{
     client.query({
-    query:gql`
-    {
-      allStartups{
-                   id
-                   name
-                   cnpj
-                   socioId
-                   logo
-                 }      
-   }
-    `
-  }).then(result => setStartups(result.data.allStartups))
+      query:gql`
+      {
+        allStartups{
+                     id
+                     name
+                     cnpj
+                     socioId
+                     logo
+                   }      
+     }
+      `
+    }).then(result => this.setState({startups: result.data.allStartups}))
+    .catch(function (error) {
+      console.log("Error getting documents: ", error);
+    });
+  }
+    render(){
+    
+    console.log(this.props)
+
+    
 
   return (
    
     <section className='basicGrid'>
-     {startups.map((item, key)=>(
+     {this.state.startups.map((item, key)=>(
         <div className='card'
             key={key}
         >
-            <img className='logo' src={startups[key].logo } alt={startups[key].name}/>
+            <img className='logo' src={this.state.startups[key].logo } alt={`startups`[key].name}/>
         </div>
      ))}
     </section>
  
-  );
+  )};
 }
 
 export default Grid

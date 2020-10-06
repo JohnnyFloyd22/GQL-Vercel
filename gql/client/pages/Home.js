@@ -19,7 +19,7 @@ export default function Home() {
       <h1 href="wwww.incit.com.br">INCIT</h1>
      
     </div>
-    <Grid></Grid>
+    <Grid/>
     
 
   </>
