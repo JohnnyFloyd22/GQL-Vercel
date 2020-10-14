@@ -1,7 +1,7 @@
 import ApolloClient from 'apollo-boost'
 import React,{useState} from 'react'
 import {gql} from 'apollo-boost'
-
+import Link from 'next/link'
 
 
 const client = new ApolloClient({
@@ -18,6 +18,7 @@ class Grid extends React.Component {
      super(params)
       this.state={
         startups:[]
+        
       }
     }
 
@@ -28,8 +29,6 @@ class Grid extends React.Component {
         allStartups{
                      id
                      name
-                     cnpj
-                     socioId
                      logo
                    }      
      }
@@ -46,14 +45,19 @@ class Grid extends React.Component {
     
 
   return (
-   
+  
+
     <section className='basicGrid'>
      {this.state.startups.map((item, key)=>(
+       
         <div className='card'
             key={key}
-        >
-            <img className='logo' src={this.state.startups[key].logo } alt={`startups`[key].name}/>
+            
+        ><Link href='/OnePage/[slug]' as={`/OnePage/${this.state.startups[key].id}`}> 
+            <img className='logo' src={this.state.startups[key].logo } alt={this.state.startups[key].name}/> 
+          </Link>
         </div>
+        
      ))}
     </section>
  

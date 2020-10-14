@@ -1,15 +1,24 @@
 
-import react,{useState} from 'react'
+import React,{useState} from 'react'
 import reactDom from 'react-dom'
 import Navbar from "../components/Navbar" 
 import AddStartUp from "../components/AddStartUp"
+import { withRouter } from 'next/router'
 
 
 
 
 
-
-export default function Home() {
+class AddStartUps extends React.Component {
+ 
+  componentDidMount=()=>{
+    
+    console.log(this.props)
+    
+  }
+  render(){
+   
+     
   return (
   <>
     <div>
@@ -20,5 +29,14 @@ export default function Home() {
     <AddStartUp></AddStartUp>
   </>
   );
+  }
+  
+  
+
 }
+
+
+
+
+export default withRouter(AddStartUps)
 

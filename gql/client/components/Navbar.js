@@ -34,7 +34,7 @@ function Navbar() {
           </li>
 
           <li className="nav-item">
-            <a href="Home" className="nav-link">
+            <a href="http://localhost:3000/Home" className="nav-link">
               <svg
                 aria-hidden="true"
                 focusable="false"
@@ -55,7 +55,7 @@ function Navbar() {
           </li>
 
           <li className="nav-item">
-            <a href="onePage" className="nav-link">
+            <a href="http://localhost:3000/AddStartUps" className="nav-link">
               <svg
                 aria-hidden="true"
                 focusable="false"

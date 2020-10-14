@@ -15,6 +15,8 @@ require('dotenv').config()
 
 //express server
 const app = express()
+
+
 //graphql server
 
 //typeDefs (all types inside the folder typeDefs)
