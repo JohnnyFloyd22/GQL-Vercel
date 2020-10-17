@@ -2,6 +2,7 @@ import ApolloClient from 'apollo-boost'
 import React,{useState} from 'react'
 import {gql} from 'apollo-boost'
 import Link from 'next/link'
+import ReactTable from 'react-table-6'
 
 
 const client = new ApolloClient({

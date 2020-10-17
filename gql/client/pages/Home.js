@@ -1,9 +1,4 @@
-
-import react,{useState} from 'react'
-import reactDom from 'react-dom'
 import Navbar from "../components/Navbar"
-import ApolloClient from 'apollo-boost'
-import {gql} from 'apollo-boost'
 import Grid from '../components/baseGrid'
 
 

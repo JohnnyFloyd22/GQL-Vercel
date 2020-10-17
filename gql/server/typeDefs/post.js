@@ -16,7 +16,6 @@ module.exports = gql`
           equipe:String
           area:String
           
-
     }    
 
     type meet{
@@ -34,9 +33,9 @@ module.exports = gql`
     type Query{
         totalStartups:Int!
         allStartups:[startups!]
-        allmeet:[meet]
+        allmeet(input:String!):[meet]
         pickStartup(input:String!):[startups!]
-        pickmeet(input:String!):[meet!]
+        pickmeet(input:String!):[meet]
         pickobjetivo(input: String!):[objetivo!]
        
     }
