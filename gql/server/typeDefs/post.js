@@ -23,12 +23,10 @@ module.exports = gql`
         msg:String!
         startupId:String!
         dataInit:String!
+        eixo:[Int]
     }
     
-    type objetivo{
-        eixo:[Int]
-        meetId:String!
-    }
+    
 
     type Query{
         totalStartups:Int!
@@ -36,7 +34,7 @@ module.exports = gql`
         allmeet(input:String!):[meet]
         pickStartup(input:String!):[startups!]
         pickmeet(input:String!):[meet]
-        pickobjetivo(input: String!):[objetivo!]
+       
        
     }
     

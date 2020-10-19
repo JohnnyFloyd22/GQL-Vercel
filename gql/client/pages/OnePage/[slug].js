@@ -28,20 +28,19 @@ function OnePage (){
     <Navbar></Navbar>
     <div className="mainGrid" style={{
       flexDirection:"row"
-    
     }}> 
-    <StartupData id={id}></StartupData>
-    
-    
-    
-    
-    
-    
-    
+       <div className="firstRow">
+         <StartupData id={id}></StartupData>
+       </div>
+      
+        <div className="SecondRow"  >
+        <MeetData id={id}></MeetData>
+
+       </div>
+
     </div>
     
-    <MeetData id={id}></MeetData>
-
+    
     </>
   )
 }

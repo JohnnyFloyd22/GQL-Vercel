@@ -2,7 +2,7 @@ import ApolloClient from 'apollo-boost'
 import React, { useState, useEffect } from "react";
 import { gql } from 'apollo-boost'
 import ReactTable from 'react-table-6';
-
+import RadarChart from 'react-svg-radar-chart';
 
 
 
@@ -14,8 +14,9 @@ const client = new ApolloClient({
 export default  function startupData(props) {
 
     const [meet,setState]=useState([])
-
+   
     useEffect(()=> {
+      
        client
           .query({
             query: gql`
@@ -24,7 +25,10 @@ export default  function startupData(props) {
                   msg
                   dataInit
                   id
+                  eixo
               }
+
+                  
             }`,
               variables: { input:props.id}
           })
@@ -34,6 +38,7 @@ export default  function startupData(props) {
           })
 
     },[])
+    
 
     const columns =[
       {
@@ -49,6 +54,8 @@ export default  function startupData(props) {
         accessor:"dataInit"
       }
     ] 
+   ;
+    
     
 
     return (
@@ -56,17 +63,18 @@ export default  function startupData(props) {
         <section className='basicGrid'>
           
        
-        <div className='meetcard'
-            
-            
-        >
+        <div className='meetcard'>
            <ReactTable
            columns={columns}
-           data={meet}
-           >
-           
+           data={meet}/>
 
-           </ReactTable>
+           <RadarChart
+            captions={captions}
+             data={meet.eixo}
+              size={450}
+           />
+
+           
           
         </div>
         

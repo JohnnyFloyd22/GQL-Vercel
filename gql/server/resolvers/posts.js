@@ -109,25 +109,7 @@ const pickStartup = (parent, args) =>
       console.log("Error getting documents: ", error);
     });
 
-const pickobjetivo = (parent, args) =>
-  db
-    .collection("objetivo")
-    .where("meetId", "==", `${args.input}`)
-    .get()
-    .then(function (querySnapshot) {
-      const ret3 = [];
-      querySnapshot.forEach(function (doc) {
-        // doc.data() is never undefined for query doc snapshots
 
-        ret3.push(doc.data());
-        return;
-      });
-      console.log(ret3);
-      return ret3;
-    })
-    .catch(function (error) {
-      console.log("Error getting documents: ", error);
-    });
 
 var newStartup = async (parent, args) => {
   console.log(args);
@@ -163,7 +145,7 @@ module.exports = {
     allStartups,
     pickStartup,
     pickmeet,
-    pickobjetivo,
+    
     allmeet,
   },
 
