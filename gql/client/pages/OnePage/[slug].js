@@ -3,6 +3,8 @@ import MeetData from "../../components/meetData";
 import {useRouter} from "next/router";
 import ApolloClient from "apollo-boost";
 import Navbar from "../../components/Navbar";
+import Dropdown from "../../components/DropDown";
+
 
 const client = new ApolloClient({
   uri: "http://localhost:8000/graphql",
@@ -28,8 +30,11 @@ function OnePage (){
     <Navbar></Navbar>
     <div className="mainGrid" style={{
       flexDirection:"row"
-    }}> 
+    }}> <Dropdown/>
+    
+
        <div className="firstRow">
+          
          <StartupData id={id}></StartupData>
        </div>
       
