@@ -18,12 +18,22 @@ module.exports = gql`
           
     }    
 
+    type eixo{
+        id:String!
+        startupId:String!
+        e1:Int
+        e2:Int
+        e3:Int
+        e4:Int
+        e5:Int
+    
+    }
     type meet{
         id:String!
         msg:String!
         startupId:String!
         dataInit:String!
-        eixo:[Int]
+       
     }
     
     
@@ -34,6 +44,7 @@ module.exports = gql`
         allmeet(input:String!):[meet]
         pickStartup(input:String!):[startups!]
         pickmeet(input:String!):[meet]
+        alleixo(input:String!):[eixo]
        
        
     }

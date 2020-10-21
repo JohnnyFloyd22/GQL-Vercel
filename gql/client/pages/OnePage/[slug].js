@@ -30,7 +30,7 @@ function OnePage (){
     <Navbar></Navbar>
     <div className="mainGrid" style={{
       flexDirection:"row"
-    }}> <Dropdown/>
+    }}> 
     
 
        <div className="firstRow">
@@ -39,6 +39,7 @@ function OnePage (){
        </div>
       
         <div className="SecondRow"  >
+        <Dropdown id={id}/>
         <MeetData id={id}></MeetData>
 
        </div>

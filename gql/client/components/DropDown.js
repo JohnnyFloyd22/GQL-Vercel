@@ -1,13 +1,65 @@
 import React, { useState, useEffect, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
+import Chart from "chart.js";
+import { gql } from "apollo-boost";
+import ApolloClient from "apollo-boost";
 
-export default function Dropdown() {
+const client = new ApolloClient({
+  uri: "http://localhost:8000/graphql",
+});
+
+
+export default function Dropdown(props) {
+
+  const [meetData, setState] = useState([]);
+  function getMeetData() {
+    
+    useEffect(() => {
+      client
+        .query({
+          query: gql`
+            query Allmeet($input: String!) {
+              allmeet(input: $input) {
+                eixo
+                id
+              }
+            }
+          `,
+          variables: { input: props.id },
+        })
+        .then((result) => setState(result.data.allmeet))
+        .then(console.log(meetData))
+        .catch(function (error) {
+          console.log("Error getting documents: ", error);
+        });
+    }, []);
+    return meetData;
+  }
+
+  getMeetData();
+  
+  
   return (
-    <Meetbar>
-      <MeetItem icon="🦔">
-        <DropdownMenu></DropdownMenu>
-      </MeetItem>
-    </Meetbar>
+    <>
+      <div
+        className="mainContainer"
+        style={{
+          flexDirection: "row",
+        }}
+      >
+        <div className="firsRow">
+          <Meetbar>
+            <MeetItem icon="🦔">
+              <DropdownMenu props={meetData}></DropdownMenu>
+            </MeetItem>
+          </Meetbar>
+        </div>
+        <div className="secondRow" style={{backgroundColor:"purple"}}>
+
+          
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -51,7 +103,7 @@ function MeetItem(props) {
       }}
     >
       <a
-        href="#"
+        href="javascript:void(0);"
         className="icon-button"
         style={{
           width: "60px * 0.5",
@@ -64,6 +116,7 @@ function MeetItem(props) {
           alignItems: "center",
           justifyContent: "center",
           transition: "filter 300ms",
+          position: "relative",
         }}
         onClick={() => setOpen(!open)}
       >
@@ -75,7 +128,7 @@ function MeetItem(props) {
   );
 }
 
-function DropdownMenu() {
+function DropdownMenu(props) {
   const [activeMenu, setActiveMenu] = useState("main");
   const [menuHeight, setMenuHeight] = useState(null);
   const dropdownRef = useRef(null);
@@ -92,7 +145,7 @@ function DropdownMenu() {
   function DropdownItem(props) {
     return (
       <a
-        href="#"
+        href="javascript:void(0);"
         className="menu-item"
         style={{
           height: "50px",
@@ -110,13 +163,9 @@ function DropdownMenu() {
       </a>
     );
   }
-
+  
   return (
-    <div
-      className="dropdown"
-      
-      ref={dropdownRef}
-    >
+    <div className="dropdown" style={{ height: menuHeight }} ref={dropdownRef}>
       <CSSTransition
         in={activeMenu === "main"}
         timeout={500}
@@ -125,7 +174,7 @@ function DropdownMenu() {
         onEnter={calcHeight}
       >
         <div className="menu">
-          <DropdownItem>My Profile</DropdownItem>
+          <DropdownItem>Reunioes</DropdownItem>
           <DropdownItem leftIcon="🦧" rightIcon="🦧" goToMenu="settings">
             Settings
           </DropdownItem>
@@ -146,10 +195,13 @@ function DropdownMenu() {
           <DropdownItem goToMenu="main" leftIcon="🦧">
             <h2>My Tutorial</h2>
           </DropdownItem>
-          <DropdownItem leftIcon="🦧">HTML</DropdownItem>
-          <DropdownItem leftIcon="🦧">CSS</DropdownItem>
-          <DropdownItem leftIcon="🦧">JavaScript</DropdownItem>
-          <DropdownItem leftIcon="🦧">Awesome!</DropdownItem>
+        <div>
+          {[props].map((item,key)=>(
+            <DropdownItem leftIcon="🦧" key={key.id}>{key}</DropdownItem>
+          )
+          )}
+        </div>
+
         </div>
       </CSSTransition>
 
@@ -171,15 +223,19 @@ function DropdownMenu() {
         </div>
       </CSSTransition>
       <style jsx>
-          {`
-          :root {
-            --bg:  #242526;
-            --bg-accent: #484a4d;
-            --text-color: #dadce1;
-            --nav-size: 60px;
-            --border: 1px solid #474a4d;
-            --border-radius: 8px;
-            --speed: 500ms; 
+        {`
+          
+          
+          ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+          }
+          
+          a {
+            href="javascript:void(0);"
+            color: #dadce1;
+            text-decoration: none;;
           }
           .dropdown {
             position: absolute;
@@ -188,17 +244,17 @@ function DropdownMenu() {
             transform: translateX(-45%);
             background-color: #242526;
             border: 1px solid #474a4d;
-            border-radius:  8px;
+            border-radius: 8px;
             padding: 1rem;
             overflow: hidden;
-            transition: height  500ms ease;
+            transition: height 500ms ease;
+            margin-top:85vh
           }
-        
+
           .menu {
             width: 100%;
-            
           }
-        
+
           .menu-item {
             height: 50px;
             display: flex;
@@ -207,23 +263,23 @@ function DropdownMenu() {
             transition: background 500ms;
             padding: 0.5rem;
           }
-        
+
           .menu-item .icon-button {
             margin-right: 0.5rem;
           }
-        
+
           .menu-item .icon-button:hover {
             filter: none;
           }
-        
+
           .menu-item:hover {
             background-color: #525357;
           }
-        
+
           .icon-right {
             margin-left: auto;
           }
-        
+
           /* CSSTransition classes  */
           .menu-primary-enter {
             position: absolute;
@@ -240,7 +296,7 @@ function DropdownMenu() {
             transform: translateX(-110%);
             transition: all 500ms ease;
           }
-        
+
           .menu-secondary-enter {
             transform: translateX(110%);
           }
@@ -254,8 +310,7 @@ function DropdownMenu() {
             transform: translateX(110%);
             transition: all 500ms ease;
           }
-          
-          `}
+        `}
       </style>
     </div>
   );
