@@ -20,7 +20,7 @@ module.exports = gql`
 
     type eixo{
         id:String!
-        startupId:String!
+        meetId:String!
         e1:Int
         e2:Int
         e3:Int

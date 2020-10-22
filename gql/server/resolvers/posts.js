@@ -41,12 +41,12 @@ const allStartups = () =>
     .collection("startups")
     .get()
     .then(function (querySnapshot) {
-      const ret = [];
+      const retAS = [];
       querySnapshot.forEach(function (doc) {
         // doc.data() is never undefined for query doc snapshots
-        ret.push(doc.data());
+        retAS.push(doc.data());
       });
-      return ret;
+      return retAS;
     })
     .catch(function (error) {
       console.log("Error getting documents: ", error);
@@ -58,32 +58,48 @@ const allmeet = (parent, args) =>
     .where("startupId", "==", `${args.input}`)
     .get()
     .then(function (querySnapshot) {
-      const ret4 = [];
+      const retAM = [];
       querySnapshot.forEach(function (doc) {
         // doc.data() is never undefined for query doc snapshots
-        ret4.push(doc.data());
+        retAM.push(doc.data());
       });
-      return ret4;
+      return retAM;
     })
     .catch(function (error) {
       console.log("Error getting documents: ", error);
     });
 
+const alleixo = (parent, args) =>
+  db
+    .collection("eixo")
+    .where("meetId", "==", `${args.input}`)
+    .get()
+    .then(function (querySnapshot) {
+      const retAE = [];
+      querySnapshot.forEach(function (doc) {
+        // doc.data() is never undefined for query doc snapshots
+        retAE.push(doc.data());
+      });
+      return retAE;
+    })
+    .catch(function (error) {
+      console.log("Error getting documents: ", error);
+    });
 const pickmeet = (parent, args) =>
   db
     .collection("meet")
     .where("id", "==", `${args.input}`)
     .get()
     .then(function (querySnapshot) {
-      const ret2 = [];
+      const retPM = [];
       querySnapshot.forEach(function (doc) {
         // doc.data() is never undefined for query doc snapshots
 
-        ret2.push(doc.data());
+        retPM.push(doc.data());
       });
       console.log(args);
-      console.log(ret2);
-      return ret2;
+      console.log(retPM);
+      return retPM;
     })
     .catch(function (error) {
       console.log("Error getting documents: ", error);
@@ -95,21 +111,19 @@ const pickStartup = (parent, args) =>
     .where("id", "==", `${args.input}`)
     .get()
     .then(function (querySnapshot) {
-      const ret1 = [];
+      const retPS = [];
       querySnapshot.forEach(function (doc) {
         // doc.data() is never undefined for query doc snapshots
 
-        ret1.push(doc.data());
+        retPS.push(doc.data());
         return;
       });
-      console.log(ret1);
-      return ret1;
+      console.log(retPS);
+      return retPS;
     })
     .catch(function (error) {
       console.log("Error getting documents: ", error);
     });
-
-
 
 var newStartup = async (parent, args) => {
   console.log(args);
@@ -145,7 +159,7 @@ module.exports = {
     allStartups,
     pickStartup,
     pickmeet,
-    
+    alleixo,
     allmeet,
   },
 

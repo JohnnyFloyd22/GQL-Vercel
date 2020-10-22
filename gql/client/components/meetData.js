@@ -22,7 +22,7 @@ export default function startupData(props) {
               msg
               dataInit
               id
-              eixo
+              
             }
           }
         `,

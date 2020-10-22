@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
-import Chart from "chart.js";
+
+import {Radar} from "react-chartjs-2"
 import { gql } from "apollo-boost";
 import ApolloClient from "apollo-boost";
 
@@ -8,26 +9,27 @@ const client = new ApolloClient({
   uri: "http://localhost:8000/graphql",
 });
 
-
 export default function Dropdown(props) {
-
   const [meetData, setState] = useState([]);
   function getMeetData() {
-    
     useEffect(() => {
       client
         .query({
           query: gql`
-            query Allmeet($input: String!) {
-              allmeet(input: $input) {
-                eixo
+            query Alleixo($input: String!) {
+              alleixo(input: $input) {
+                e1
+                e2
+                e3
+                e4
+                e5
                 id
               }
             }
           `,
           variables: { input: props.id },
         })
-        .then((result) => setState(result.data.allmeet))
+        .then((result) => setState(result.data.alleixo))
         .then(console.log(meetData))
         .catch(function (error) {
           console.log("Error getting documents: ", error);
@@ -37,8 +39,25 @@ export default function Dropdown(props) {
   }
 
   getMeetData();
+  const data={data : {
+    labels: ['Running', 'Swimming', 'Eating', 'Cycling'],
+    datasets: [{
+        data: [20, 10, 4, 2]
+    }],
+    options : {
+      scale: {
+          angleLines: {
+              display: false
+          },
+          ticks: {
+              suggestedMin: 50,
+              suggestedMax: 100
+          }
+      }
+  }
+  }}
   
-  
+
   return (
     <>
       <div
@@ -54,10 +73,19 @@ export default function Dropdown(props) {
             </MeetItem>
           </Meetbar>
         </div>
-        <div className="secondRow" style={{backgroundColor:"purple"}}>
+        <canvas
+          className="secondRow"
+          id="secondRow"
+          style={{marginLeft:"60rem"}}
+        >
+          <Radar
+            data={data.data.datasets }
+            labels={data.data.labels}
+          
+          ></Radar>
 
           
-        </div>
+        </canvas>
       </div>
     </>
   );
@@ -131,10 +159,12 @@ function MeetItem(props) {
 function DropdownMenu(props) {
   const [activeMenu, setActiveMenu] = useState("main");
   const [menuHeight, setMenuHeight] = useState(null);
+  const [chartData, setChartData] = useState(null);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
     setMenuHeight(dropdownRef.current?.firstChild.offsetHeight);
+    setChartData(props);
   }, []);
 
   function calcHeight(el) {
@@ -163,7 +193,7 @@ function DropdownMenu(props) {
       </a>
     );
   }
-  
+
   return (
     <div className="dropdown" style={{ height: menuHeight }} ref={dropdownRef}>
       <CSSTransition
@@ -192,16 +222,12 @@ function DropdownMenu(props) {
         onEnter={calcHeight}
       >
         <div className="menu">
-          <DropdownItem goToMenu="main" leftIcon="🦧">
-            <h2>My Tutorial</h2>
+          <DropdownItem goToMenu="main">
+            <h2>Selecione as Reuniões :</h2>
           </DropdownItem>
-        <div>
-          {[props].map((item,key)=>(
-            <DropdownItem leftIcon="🦧" key={key.id}>{key}</DropdownItem>
-          )
-          )}
-        </div>
-
+          {props.props.map((item, key) => (
+            <DropdownItem key={key}>{props.props[key].id}</DropdownItem>
+          ))}
         </div>
       </CSSTransition>
 
