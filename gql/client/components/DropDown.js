@@ -78,12 +78,7 @@ export default function Dropdown(props) {
           id="secondRow"
           style={{marginLeft:"60rem"}}
         >
-          <Radar
-            data={data.data.datasets }
-            labels={data.data.labels}
           
-          ></Radar>
-
           
         </canvas>
       </div>
